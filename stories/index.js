@@ -25,9 +25,7 @@ storiesOf("Button", module)
     <Button disabled onClick={action("button-clicked")}>
       Disabled
     </Button>
-  ));
-
-
+));
 
 storiesOf("DayListItem", module) 
 .addParameters({
@@ -99,7 +97,7 @@ storiesOf("DayList", module)
         id={interviewer.id}
         name={interviewer.name}
         avatar={interviewer.avatar}
-        setInterviewer={action("setInterviewer")}
+        setInterviewer={event => action("setInterviewer")(interviewer.id)}
       />
     ));
 
