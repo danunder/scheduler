@@ -60,7 +60,12 @@ export default function Application(props) {
 
   useEffect(() => {
     axios.get("/api/days")
-    .then(response => setDays(response.data));
+    .then(response => setDays(response.data))
+    .catch((error) => {
+      console.log(error.response.status);
+      console.log(error.response.headers);
+      console.log(error.response.data);
+    });
 
   }, [])
 
