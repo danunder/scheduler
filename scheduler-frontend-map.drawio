@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-12-09T15:16:45.198Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="NJ14Yr1YVcvPxB0NMbCp" version="13.11.0" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-09T15:22:16.212Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="ck_yVFzit1eRkNkbi9rQ" version="13.11.0" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="2200" dy="774" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -97,7 +97,7 @@
         <mxCell id="A5uWAZjU7SPnxZfKaYR8-24" value="props:" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=0;fontFamily=Permanent Marker;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DPermanent%2BMarker;fontSize=17;strokeColor=none;" parent="A5uWAZjU7SPnxZfKaYR8-23" vertex="1">
           <mxGeometry width="80" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="A5uWAZjU7SPnxZfKaYR8-25" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=5;dashed=1;strokeColor=none;" parent="A5uWAZjU7SPnxZfKaYR8-23" vertex="1">
+        <mxCell id="A5uWAZjU7SPnxZfKaYR8-25" value="Copy and" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=0;dashed=1;strokeColor=none;fontFamily=Comic Sans MS;fontSize=16;" parent="A5uWAZjU7SPnxZfKaYR8-23" vertex="1">
           <mxGeometry x="80" width="170" height="40" as="geometry" />
         </mxCell>
         <mxCell id="A5uWAZjU7SPnxZfKaYR8-26" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="A5uWAZjU7SPnxZfKaYR8-22" vertex="1">
@@ -106,7 +106,7 @@
         <mxCell id="A5uWAZjU7SPnxZfKaYR8-27" value="state: " style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=0;fontFamily=Permanent Marker;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DPermanent%2BMarker;fontSize=17;strokeColor=none;" parent="A5uWAZjU7SPnxZfKaYR8-26" vertex="1">
           <mxGeometry width="80" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="A5uWAZjU7SPnxZfKaYR8-28" value="" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;" parent="A5uWAZjU7SPnxZfKaYR8-26" vertex="1">
+        <mxCell id="A5uWAZjU7SPnxZfKaYR8-28" value="Paste me!" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontFamily=Comic Sans MS;fontSize=16;" parent="A5uWAZjU7SPnxZfKaYR8-26" vertex="1">
           <mxGeometry x="80" width="170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="A5uWAZjU7SPnxZfKaYR8-29" value="" style="endArrow=classic;html=1;fontFamily=Comic Sans MS;fontSize=16;" parent="1" edge="1">
