@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-12-09T15:22:16.212Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="ck_yVFzit1eRkNkbi9rQ" version="13.11.0" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-09T15:23:19.647Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="ydcmiuhhDIPJ94fvXV-H" version="13.11.0" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="2200" dy="774" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -22,7 +22,7 @@
         <mxCell id="C-vyLk0tnHw3VtMMgP7b-28" value="state: " style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=0;fontFamily=Permanent Marker;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DPermanent%2BMarker;fontSize=17;strokeColor=none;" parent="C-vyLk0tnHw3VtMMgP7b-27" vertex="1">
           <mxGeometry width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="C-vyLk0tnHw3VtMMgP7b-29" value="[ day, setDay ]&#xa;[interviewer, onChange]" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontFamily=Comic Sans MS;fontSize=16;whiteSpace=wrap;" parent="C-vyLk0tnHw3VtMMgP7b-27" vertex="1">
+        <mxCell id="C-vyLk0tnHw3VtMMgP7b-29" value="[ day, setDay ]&#xa;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontFamily=Comic Sans MS;fontSize=16;whiteSpace=wrap;" parent="C-vyLk0tnHw3VtMMgP7b-27" vertex="1">
           <mxGeometry x="80" width="300" height="80" as="geometry" />
         </mxCell>
         <mxCell id="A5uWAZjU7SPnxZfKaYR8-1" value="DayList" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=0;align=center;resizeLast=1;fillColor=#dae8fc;strokeWidth=2;perimeterSpacing=1;rounded=1;shadow=1;gradientColor=#7ea6e0;swimlaneFillColor=#99CCFF;fontFamily=Permanent Marker;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DPermanent%2BMarker;fontSize=16;strokeColor=#6c8ebf;" parent="1" vertex="1">
