@@ -50,12 +50,12 @@ export default function useApplicationData (initial) {
       appointment
     )
     .then(res => {
-      
-      if (res.status === 204) {
+      // const thisDaysSpots = state.days.filter(day => day.appointment.includes(id));
+      // console.log(thisDaysSpots);
         // updates local state with new appointment and executes callback function
-        setState(prev => ({...prev, appointments}));
+        setState(prev => ({...prev, appointments }));
         
-      }  
+      
     })
 
   };
