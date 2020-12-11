@@ -53,9 +53,10 @@ export function getInterview(state, interview) {
 export function updateSpots(days, id, val) {
 
   
+   
   days.forEach(day => {
     if (day.appointments.includes(id)) {
-      day.spots = [parseInt(day.spots) + val];
+      day.spots = parseInt(day.spots) + val;
     }
   })
   
