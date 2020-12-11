@@ -47,12 +47,13 @@ export default function Appointment (props) {
       transition(SAVING);
 
       // callbacks passed to bookInterview function
-      const done = () => transition(SHOW);
-      const error = () => transition(ERROR_SAVE, true);
+      
 
       // passes bookInterview function appointment id, interview object and callbacks to be executed after API request
-      props.bookInterview(props.id, interview, done, error);
-      
+      props
+        .bookInterview(props.id, interview)
+        .then( () => transition(SHOW))
+        .catch( () => transition(ERROR_SAVE, true))
     };
   }
 
@@ -63,12 +64,14 @@ export default function Appointment (props) {
     transition(DELETING, true);
     
     // callbacks passed to deleteInterview function
-    const done = () => transition(EMPTY);
-    const error = () => transition(ERROR_DELETE, true);
+    // const done = () => transition(EMPTY);
+    // const error = () => transition(ERROR_DELETE, true);
     
     // passes deleteInterview function appointment id and callbacks to be executed after API request
-    props.deleteInterview(props.id, done, error);
-    
+    props
+      .deleteInterview(props.id)
+      .then( () => transition(EMPTY))
+      .catch( () => transition(ERROR_DELETE, true))
   }
 
   function confirm() {
