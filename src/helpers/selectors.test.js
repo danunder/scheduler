@@ -1,4 +1,4 @@
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay, updateSpots } from "helpers/selectors";
 
 const state = {
   days: [
@@ -14,7 +14,7 @@ const state = {
       name: "Tuesday",
       appointments: [4, 5],
       interviewers: [1, 2],
-      spots: [3]
+      spots: [1]
     }
   ],
   appointments: {
@@ -117,3 +117,12 @@ test("getInterview returns null if no interview is booked", () => {
   const result = getInterview(state, state.appointments["2"].interview);
   expect(result).toBeNull();
 });
+
+test("updateSpots returns an array of days", () => {
+  const result = updateSpots(state, 1, 1);
+  expect(result).toEqual(
+    expect.objectContaining(expect.Array()));
+});
+
+// receives an array of objects and returns a copy of that object
+

@@ -49,3 +49,18 @@ export function getInterview(state, interview) {
   return {...interview, interviewer: interviewerDetails};
 
 };
+// update the spots available on the day by a supplied value
+export function updateSpots(days, id, val) {
+
+  
+  days.forEach(day => {
+    if (day.appointments.includes(id)) {
+      day.spots = [parseInt(day.spots) + val];
+    }
+  })
+  
+  return days; 
+  
+
+};
+

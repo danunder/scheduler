@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { updateSpots } from 'helpers/selectors';
 
 export default function useApplicationData (initial) {
 
@@ -34,7 +35,7 @@ export default function useApplicationData (initial) {
 
   // allows interviews to be booked. takes a callback function to execute after API request
   function bookInterview(id, interview) {
-    
+    // updates appointment data
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -44,16 +45,17 @@ export default function useApplicationData (initial) {
       ...state.appointments,
       [id]: appointment
     };
+    // updates available spots for the day 
+    const days = updateSpots([ ...state.days], id, -1)
 
     // API request to update appointments
     return axios.put(`/api/appointments/${id}`, 
       appointment
     )
     .then(res => {
-      // const thisDaysSpots = state.days.filter(day => day.appointment.includes(id));
       // console.log(thisDaysSpots);
         // updates local state with new appointment and executes callback function
-        setState(prev => ({...prev, appointments }));
+        setState(prev => ({...prev, days, appointments }));
         
       
     })
@@ -62,6 +64,7 @@ export default function useApplicationData (initial) {
 
   function deleteInterview(id) {
     
+    // updates appointment data
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -72,13 +75,13 @@ export default function useApplicationData (initial) {
       [id]: appointment
     };
 
+    // updates available spots for the day 
+    const days = updateSpots([ ...state.days], id, 1)
+
     return axios.delete(`/api/appointments/${id}`)
     .then( () =>  
-      
         // updates local state with new appointment and executes callback function
-        setState(prev => ({...prev, appointments}))
-        
-        
+        setState(prev => ({...prev, days, appointments}))      
     )
     
   };
