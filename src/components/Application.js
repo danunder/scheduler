@@ -26,7 +26,69 @@ export default function Application() {
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
   
+   // allows interviews to be booked. takes a callback function to execute after API request
+  function bookInterview(id, interview, done, error) {
+    
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    // API request to update appointments
+    axios.put(`/api/appointments/${id}`, {
+      interview
+    })
+    .then(res => {
+     
+      if (res.status === 204) {
+        // updates local state with new appointment and executes callback function
+        setState(prev => ({...prev, appointments}));
+        done && done();
+      }  
+    })
+    .catch((err) => {
+      console.log(err.response.status);
+      console.log(err.response.headers);
+      console.log(err.response.data);
+      error && error();
+    });
+  };
   
+  function deleteInterview(id, done, error) {
+    
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    axios.delete(`/api/appointments/${id}`)
+    .then(res => {
+     
+      if (res.status === 204) {
+        // updates local state with new appointment and executes callback function
+        setState(prev => ({...prev, appointments}));
+        done && done();
+      }  
+    })
+    .catch((err) => {
+      console.log(err.response.status);
+      console.log(err.response.headers);
+      console.log(err.response.data);
+      error && error();
+    });
+  };
+  
+
   // Generates appointment appointment elements for the selected day 
   const schedule = appointments.map((appointment) => {
 
@@ -40,10 +102,11 @@ export default function Application() {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
+        deleteInterview={deleteInterview}
       />
     )
   });
-
 
   // API call to database to obtain appointment data.
   useEffect(() => {
