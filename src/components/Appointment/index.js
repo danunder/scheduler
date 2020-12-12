@@ -34,7 +34,7 @@ export default function Appointment (props) {
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);  
 
   // generates interview object and passes to bookInterview function
-  function save(name, interviewer, val) {
+  function save(name, interviewer, changeSpots) {
     
     // interviewer value of null will crash app on rendering so basic error handling required here
     if (name && interviewer){
@@ -51,7 +51,7 @@ export default function Appointment (props) {
 
       // passes bookInterview function appointment id, interview object and callbacks to be executed after API request
       props
-        .bookInterview(props.id, interview, val)
+        .bookInterview(props.id, interview, changeSpots)
         .then( () => transition(SHOW))
         .catch( () => transition(ERROR_SAVE, true))
     };
@@ -106,7 +106,7 @@ export default function Appointment (props) {
         interviewers={props.interviewers} 
         onCancel={back} 
         onSave={save}
-        val={-1} />
+        changeSpots={true} />
       )}     
 
       {mode === EDIT && ( // View selected by clicking onEdit component in SHOW view
@@ -116,7 +116,7 @@ export default function Appointment (props) {
         interviewers={props.interviewers}
         onCancel={back}
         onSave={save}
-        val={0} />
+        changeSpots={false} />
       )}
       
       {mode === CONFIRM && // View selected by clicking onDelete component in SHOW view
