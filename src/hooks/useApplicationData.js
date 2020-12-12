@@ -34,7 +34,7 @@ export default function useApplicationData (initial) {
   }, [])
 
   // allows interviews to be booked. takes a callback function to execute after API request
-  function bookInterview(id, interview) {
+  function bookInterview(id, interview, val) {
     // updates appointment data
     const appointment = {
       ...state.appointments[id],
@@ -46,7 +46,7 @@ export default function useApplicationData (initial) {
       [id]: appointment
     };
     // updates available spots for the day 
-    const days = updateSpots([ ...state.days], id, -1)
+    const days = updateSpots([ ...state.days], id, val)
 
     // API request to update appointments
     return axios.put(`/api/appointments/${id}`, 
