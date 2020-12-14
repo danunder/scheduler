@@ -1,14 +1,12 @@
 import React from "react";
 
-
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
 
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors"
-
-import "components/Application.scss";
 import useApplicationData from "hooks/useApplicationData";
 
+import "components/Application.scss";
 
 export default function Application() {
    
@@ -34,8 +32,7 @@ export default function Application() {
         deleteInterview={deleteInterview}
       />
     )
-  }); 
-  
+  });   
 
   // render function
   return (
