@@ -118,11 +118,11 @@ test("getInterview returns null if no interview is booked", () => {
   expect(result).toBeNull();
 });
 
-test("updateSpots returns an array of days", () => {
-  const result = updateSpots(state, 1, 1);
-  expect(result).toEqual(
-    expect.objectContaining(expect.Array()));
-});
+// test("updateSpots returns an array of days", () => {
+//   const result = updateSpots(state, 1, 1);
+//   expect(result).toEqual(
+//     expect.objectContaining(expect.Array()));
+// });
 
-// receives an array of objects and returns a copy of that object
+// receives an array of ects and returns a copy of that object
 
