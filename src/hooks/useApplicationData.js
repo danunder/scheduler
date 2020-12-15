@@ -4,11 +4,6 @@ import { updateSpots } from 'helpers/selectors';
 
 export default function useApplicationData (initial) {
 
-  // Defaults to Monday - should it default to 'Today'? 
-  // const [ state, setState ] = useState({
-    
-  // });
-
   const SET_DAY = "SET_DAY";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
@@ -29,7 +24,6 @@ export default function useApplicationData (initial) {
     }
   }
 
-
   const [ state, dispatch ] = useReducer(reducer, {
     day: "Monday",
     days: [],
@@ -37,7 +31,7 @@ export default function useApplicationData (initial) {
     interviewers: {}
 
   })
-  // const { day, days, appointments, interviewers } = state;
+  
 
   // setDay called by DayList in navbar will update state
   const setDay = (day) => dispatch({type: "SET_DAY", day});
