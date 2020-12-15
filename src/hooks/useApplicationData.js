@@ -1,19 +1,46 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { updateSpots } from 'helpers/selectors';
 
 export default function useApplicationData (initial) {
 
   // Defaults to Monday - should it default to 'Today'? 
-  const [ state, setState ] = useState({
+  // const [ state, setState ] = useState({
+    
+  // });
+
+  const SET_DAY = "SET_DAY";
+  const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
+  const SET_INTERVIEW = "SET_INTERVIEW";
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case SET_DAY:
+        return {...state, day : action.day}  
+      case SET_APPLICATION_DATA:
+        return {...state, days: action.days.data, appointments: action.appointments.data, interviewers: action.interviewers.data }
+      case SET_INTERVIEW: {
+        return {...state, days: action.days, appointments: action.appointments, }
+      }
+      default:
+        throw new Error(
+          `Tried to reduce with unsupported action type: ${action.type}`
+        );
+    }
+  }
+
+
+  const [ state, dispatch ] = useReducer(reducer, {
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
-  });
+
+  })
+  // const { day, days, appointments, interviewers } = state;
 
   // setDay called by DayList in navbar will update state
-  const setDay = day => setState(prev => ({...prev, day }));
+  const setDay = (day) => dispatch({type: "SET_DAY", day});
 
   // API call to database to obtain appointment data.
   useEffect(() => {
@@ -24,7 +51,8 @@ export default function useApplicationData (initial) {
     ]).then((all) => {
       // destructure API response array and populate state with data
       const [ days, appointments, interviewers ] = all;
-      setState(prev => ({...prev, days: days.data, appointments: appointments.data, interviewers: interviewers.data}))
+      dispatch({type: SET_APPLICATION_DATA, days, appointments, interviewers })
+      
     })
     .catch((error) => {
       console.log(error.response.status);
@@ -55,7 +83,7 @@ export default function useApplicationData (initial) {
     .then(res => {
       // console.log(thisDaysSpots);
         // updates local state with new appointment and executes callback function
-        setState(prev => ({...prev, days, appointments }));
+        dispatch({type: SET_INTERVIEW, days, appointments});
         
       
     })
@@ -81,7 +109,7 @@ export default function useApplicationData (initial) {
     return axios.delete(`/api/appointments/${id}`)
     .then( () =>  
         // updates local state with new appointment and executes callback function
-        setState(prev => ({...prev, days, appointments}))      
+        dispatch({type: SET_INTERVIEW, days, appointments})      
     )
     
   };
