@@ -13,7 +13,7 @@ export default function useApplicationData (initial) {
       case SET_DAY:
         return {...state, day : action.day}  
       case SET_APPLICATION_DATA:
-        return {...state, days: action.days.data, appointments: action.appointments.data, interviewers: action.interviewers.data }
+        return {...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers }
       case SET_INTERVIEW: {
         return {...state, days: action.days, appointments: action.appointments, }
       }
@@ -40,19 +40,19 @@ export default function useApplicationData (initial) {
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
-      axios.get("api/appointments"),
-      axios.get("api/interviewers"),
+      axios.get("/api/appointments"),
+      axios.get("/api/interviewers"),
     ]).then((all) => {
       // destructure API response array and populate state with data
       const [ days, appointments, interviewers ] = all;
-      dispatch({type: SET_APPLICATION_DATA, days, appointments, interviewers })
+      dispatch({type: SET_APPLICATION_DATA, days : days.data, appointments : appointments.data, interviewers: interviewers.data })
       
     })
-    .catch((error) => {
-      console.log(error.response.status);
-      console.log(error.response.headers);
-      console.log(error.response.data);
-    });
+    // .catch((error) => {
+    //   console.log(error.response.status);
+    //   console.log(error.response.headers);
+    //   console.log(error.response.data);
+    // });
   }, [])
 
   // allows interviews to be booked. takes a callback function to execute after API request
