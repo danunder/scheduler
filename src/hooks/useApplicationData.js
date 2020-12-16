@@ -7,15 +7,33 @@ export default function useApplicationData (initial) {
   const SET_DAY = "SET_DAY";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
+  const RESET = "RESET";
 
   function reducer(state, action) {
     switch (action.type) {
       case SET_DAY:
-        return {...state, day : action.day}  
+        return {...state, 
+          day : action.day
+        }  
       case SET_APPLICATION_DATA:
-        return {...state, days: action.days, appointments: action.appointments, interviewers: action.interviewers }
+        return {...state, 
+          days: action.days, 
+          appointments: action.appointments, 
+          interviewers: action.interviewers 
+        }
       case SET_INTERVIEW: {
-        return {...state, days: action.days, appointments: action.appointments, }
+        return {...state, 
+          days: action.days, 
+          appointments: action.appointments 
+        }
+      }
+      case RESET: {
+        return { ...state,
+          day: "Monday",
+          days: [],
+          appointments: {},
+          interviewers: {}
+        }
       }
       default:
         throw new Error(
@@ -38,6 +56,7 @@ export default function useApplicationData (initial) {
 
   // API call to database to obtain appointment data.
   useEffect(() => {
+    dispatch({type: "RESET"})
     Promise.all([
       axios.get("/api/days"),
       axios.get("/api/appointments"),
@@ -102,7 +121,7 @@ export default function useApplicationData (initial) {
 
     return axios.delete(`/api/appointments/${id}`)
     .then( () =>  
-        // updates local state with new appointment and executes callback function
+        // updates local state with new appointment and updated spot availability
         dispatch({type: SET_INTERVIEW, days, appointments})      
     )
     
