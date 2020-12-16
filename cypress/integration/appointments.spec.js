@@ -27,8 +27,8 @@ describe("Appointments", () => {
     cy.contains(".appointment__card--show", "Mister Alan Rickman");
     cy.contains(".appointment__card--show", "Sylvia Palmer");
 
-
   });
+
   it("should edit an interview", () => {
     // Clicks the edit button for the existing appointment
     cy.get("[alt=Edit]")
