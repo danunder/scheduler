@@ -35,7 +35,7 @@ deploy:
           git push https://github.com/danuhnder/scheduler.git master:production
 
 workflows:
-  version: 2
+  
   test_and_deploy:
     jobs:
       - build:
