@@ -4,6 +4,7 @@ A modern, single page client application, built with React that allows interview
 
 
 [CHECK IT OUT HERE](https://pensive-sinoussi-912e59.netlify.app/) 
+give it a minute for the database to warm up :-)
 
 
 ![Main Application Screen](https://github.com/danuhnder/scheduler/blob/master/docs/Application.png)
