@@ -61,6 +61,7 @@ export default {
         status: 200,
         statusText: "OK",
         data: [
+          // fixtures.days was returned here originally BUT was modified during tests and stopped following tests from running cleanly.
           {
             id: 1,
             name: "Monday",

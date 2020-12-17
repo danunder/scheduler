@@ -1,6 +1,7 @@
+//Dependency
 import React from "react";
-// import { action } from "@storybook/addon-actions/dist/preview";
 
+// Components
 import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
@@ -9,8 +10,10 @@ import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
 
+// hooks / helper functions
 import useVisualMode from "hooks/useVisualMode";
 
+// style
 import 'components/Appointment/styles.scss';
 
 
@@ -34,27 +37,23 @@ export default function Appointment (props) {
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);  
 
   // generates interview object and passes to bookInterview function
-  function save(name, interviewer, changeSpots) {
+  function save(name, interviewer, isNew) {
     
-    // interviewer value of null will crash app on rendering so basic error handling required here
-    if (name && interviewer){
-      const interview = {
-      student: name,
-      interviewer
-      }
+    const interview = {
+    student: name,
+    interviewer
+    }
 
-      // SAVING mode displayed until SHOW or ERROR transition executed by bookInterview function
-      transition(SAVING);
+    // SAVING mode displayed until SHOW or ERROR transition executed by bookInterview function
+    transition(SAVING);
 
-      // callbacks passed to bookInterview function
-      
-
-      // passes bookInterview function appointment id, interview object and callbacks to be executed after API request
-      props
-        .bookInterview(props.id, interview, changeSpots)
-        .then( () => transition(SHOW))
-        .catch( () => transition(ERROR_SAVE, true))
-    };
+    // passes bookInterview function appointment id, interview object 
+    props
+      .bookInterview(props.id, interview, isNew)
+      // transitions to new view modes
+      .then( () => transition(SHOW))
+      .catch( () => transition(ERROR_SAVE, true))
+    
   }
 
   // deletes appointment record from the database
@@ -63,17 +62,15 @@ export default function Appointment (props) {
     // DELETING mode displayed until EMPTY or ERROR transition executed by deleteInterview function
     transition(DELETING, true);
     
-    // callbacks passed to deleteInterview function
-    // const done = () => transition(EMPTY);
-    // const error = () => transition(ERROR_DELETE, true);
-    
-    // passes deleteInterview function appointment id and callbacks to be executed after API request
+    // passes deleteInterview function appointment id 
     props
       .deleteInterview(props.id)
+      // transitions to new view modes
       .then( () => transition(EMPTY))
       .catch( () => transition(ERROR_DELETE, true))
   }
 
+  
   function confirm() {
     
     transition(CONFIRM);
@@ -106,17 +103,17 @@ export default function Appointment (props) {
         interviewers={props.interviewers} 
         onCancel={back} 
         onSave={save}
-        changeSpots={true} />
+        isNew={true} />
       )}     
 
       {mode === EDIT && ( // View selected by clicking onEdit component in SHOW view
       <Form 
         name={props.interview.student}
-        interviewer={props.interview.interviewer.id}
+        interviewer={props.interview.interviewer&&props.interview.interviewer.id}
         interviewers={props.interviewers}
         onCancel={back}
         onSave={save}
-        changeSpots={false} />
+        isNew={false} />
       )}
       
       {mode === CONFIRM && // View selected by clicking onDelete component in SHOW view
@@ -128,9 +125,11 @@ export default function Appointment (props) {
       {mode === SAVING && // View appears while API processing save request 
       <Status message="Saving" ></Status>}
 
-      {mode === ERROR_SAVE && <Error message="Appointment could not be saved" onClose={back} />}
+      {mode === ERROR_SAVE && // View appears if API returns error saving appointment
+      <Error message="Appointment could not be saved" onClose={back} />}
 
-      {mode === ERROR_DELETE && <Error message="Appointment could not be deleted" onClose={back} />}
+      {mode === ERROR_DELETE && // View appears if API returns error saving appointment
+      <Error message="Appointment could not be deleted" onClose={back} />}
 
     </article>
     )

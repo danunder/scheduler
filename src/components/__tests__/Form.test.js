@@ -51,7 +51,7 @@ describe("Form", () => {
 
     /* 2. Render the Form with interviewers, name and the onSave mock function passed as an onSave prop */
   
-    const { getByText, queryByText } = render(<Form interviewers={interviewers} name="Lydia Miller-Jones" onSave={onSave} changeSpots={true} />)
+    const { getByText, queryByText } = render(<Form interviewers={interviewers} name="Lydia Miller-Jones" onSave={onSave} isNew={true} />)
 
     /* 3. Click the save button */
     
@@ -67,7 +67,7 @@ describe("Form", () => {
   it("submits the name entered by the user", () => {
     const onSave = jest.fn();
     const { getByText, getByPlaceholderText } = render(
-      <Form interviewers={interviewers} onSave={onSave} changeSpots={true}/>
+      <Form interviewers={interviewers} onSave={onSave} isNew={true}/>
     );
   
     const input = getByPlaceholderText("Enter Student Name");
@@ -82,7 +82,7 @@ describe("Form", () => {
   it("can successfully save after trying to submit an empty student name", () => {
     const onSave = jest.fn();
     const { getByText, getByPlaceholderText, queryByText } = render(
-      <Form interviewers={interviewers} onSave={onSave} changeSpots={true}/>
+      <Form interviewers={interviewers} onSave={onSave} isNew={true}/>
     );
   
     fireEvent.click(getByText("Save"));

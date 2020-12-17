@@ -1,11 +1,15 @@
+// dependency
 import React from "react";
 
+// components
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
 
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors"
+// hooks / helper functions
 import useApplicationData from "hooks/useApplicationData";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors"
 
+// style
 import "components/Application.scss";
 
 export default function Application() {
@@ -17,8 +21,10 @@ export default function Application() {
     deleteInterview 
   } = useApplicationData();
   
-  // builds appointments for the day
+  // generates array of interviewers for the selected day
   const interviewers = getInterviewersForDay(state, state.day);
+  
+  // generates array of appointments for the selected day and returns them as JSX elements
   const appointments = getAppointmentsForDay(state, state.day).map(
     (appointment) => {
     return (
@@ -34,7 +40,7 @@ export default function Application() {
     )
   });   
 
-  // render function
+  // renders HTML elements
   return (
     <main className="layout">
       <section className="sidebar">

@@ -4,12 +4,14 @@ import { updateSpots } from 'helpers/selectors';
 
 export default function useApplicationData (initial) {
 
+  // defines actions for reducer function
   const SET_DAY = "SET_DAY";
   const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
   const SET_INTERVIEW = "SET_INTERVIEW";
-  const RESET = "RESET";
-
+  
+  // gatekeeper of state modification
   function reducer(state, action) {
+    
     switch (action.type) {
       case SET_DAY:
         return {...state, 
@@ -27,14 +29,6 @@ export default function useApplicationData (initial) {
           appointments: action.appointments 
         }
       }
-      case RESET: {
-        return { ...state,
-          day: "Monday",
-          days: [],
-          appointments: {},
-          interviewers: {}
-        }
-      }
       default:
         throw new Error(
           `Tried to reduce with unsupported action type: ${action.type}`
@@ -42,63 +36,57 @@ export default function useApplicationData (initial) {
     }
   }
 
+  // sets initial state for the application
   const [ state, dispatch ] = useReducer(reducer, {
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
 
-  })
-  
+  })  
 
   // setDay called by DayList in navbar will update state
   const setDay = (day) => dispatch({type: "SET_DAY", day});
 
-  // API call to database to obtain appointment data.
   useEffect(() => {
-    dispatch({type: "RESET"})
+    
+    // API call to database to obtain appointment data.
     Promise.all([
       axios.get("/api/days"),
       axios.get("/api/appointments"),
       axios.get("/api/interviewers"),
     ]).then((all) => {
-      // destructure API response array and populate state with data
+      // destructure API response array and populate state with received data
       const [ days, appointments, interviewers ] = all;
       dispatch({type: SET_APPLICATION_DATA, days : days.data, appointments : appointments.data, interviewers: interviewers.data })
       
-    })
-    // .catch((error) => {
-    //   console.log(error.response.status);
-    //   console.log(error.response.headers);
-    //   console.log(error.response.data);
-    // });
+    });
+  // empty dependency array means this function is only triggered on page reload
   }, [])
 
-  // allows interviews to be booked. takes a callback function to execute after API request
-  function bookInterview(id, interview, changeSpots) {
-    // updates appointment data
+  // allows interviews to be booked (isNew) and edited (!isNew)
+  function bookInterview(id, interview, isNew) {
+    // updates appointment data with interview object
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
-
+    // takes updated appointment and builds new appointments array
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
-    // updates available spots for the day 
-    const days = changeSpots? updateSpots([ ...state.days], id, -1) : [ ...state.days];
+    // updates available spots for the day if the appointment is new
+    const days = isNew? updateSpots([ ...state.days], id, -1) : [ ...state.days];
 
-    // API request to update appointments
+    // API request to update singular appointment instance in database
     return axios.put(`/api/appointments/${id}`, 
       appointment
     )
     .then(res => {
       // console.log(thisDaysSpots);
-        // updates local state with new appointment and executes callback function
-        dispatch({type: SET_INTERVIEW, days, appointments});
-        
-      
+        // updates local state with new appointments and days
+        dispatch({type: SET_INTERVIEW, days, appointments});            
     })
 
   };
@@ -127,5 +115,6 @@ export default function useApplicationData (initial) {
     
   };
 
+  // functions called in application.js
   return { state, setDay, bookInterview, deleteInterview }
 }
