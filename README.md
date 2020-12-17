@@ -3,7 +3,7 @@
 A modern, single page client application, built with React that allows interviews to be booked Monday to Friday. Data is persisted through the use of a PostgreSQL database communicating with an Axios client (JSON format data over HTTP). Full testing suite has been built using Storybook, Jest and Cypress.
 
 
-[CHECK IT OUT HERE][https://pensive-sinoussi-912e59.netlify.app/] 
+[CHECK IT OUT HERE](https://pensive-sinoussi-912e59.netlify.app/) 
 
 
 ![Main Application Screen](https://github.com/danuhnder/scheduler/blob/master/docs/Application.png)
