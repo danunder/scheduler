@@ -20,7 +20,7 @@ export default function InterviewerList (props){
       name={value.name}
       avatar={value.avatar}
       selected={value.id === props.value}
-      onChange={() => props.selected? props.onChange(null) : props.onChange(value.id)}
+      onChange={() => props.onChange(value.id)}
       />
       )}
     </ul>
